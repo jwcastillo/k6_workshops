@@ -35,6 +35,7 @@ jobs:
         shell: bash
         run: |
           echo "Build Step"
+          echo $GITHUB_WORKSPACE/testing_en_chile/load_testing_cicd_k6/k6-example-woocommerce/main.js
 
       - name: Test Functional and postbuild step my Fake App
         shell: bash
@@ -44,5 +45,5 @@ jobs:
       - name: Run Perf Test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: main.js
+          filename: $GITHUB_WORKSPACE/testing_en_chile/load_testing_cicd_k6/k6-example-woocommerce/main.js
           flags: -v -q # verbose, quiet
