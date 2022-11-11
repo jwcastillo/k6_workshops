@@ -24,6 +24,8 @@ export const options = {
 
 export default function () {
   let res = http.get("http://httpbin.org/");
+ 
+
   let passed = check(res, { "status is 200": (r) => r.status === 200 });
 
   // Add one for number of requests
@@ -41,7 +43,7 @@ export default function () {
 
   const responses = http.batch([
     "http://test.k6.io",
-    "http://test.k6.io/pi.php"
+    "http://test.k6.io/error.html",
   ]);
 
   check(responses[0], {
