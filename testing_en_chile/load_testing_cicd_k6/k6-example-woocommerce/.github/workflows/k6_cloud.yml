@@ -23,14 +23,29 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout
-        uses: actions/checkout@v1
+     - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Linter, Unit Test, and prebuild step my Fake App
+        shell: bash
+        run: |
+          echo "Test Prebuild Step"
+
+      - name: Build my Fake App
+        shell: bash
+        run: |
+          echo "Build Step"
+
+      - name: Test Functional and postbuild step my Fake App
+        shell: bash
+        run: |
+          echo "Test Postbuild Step"
       
       - name: Run Test
         uses: grafana/k6-action@v0.2.0
         with:
           cloud: true
-          filename: testing_en_chile/load_testing_cicd_k6/k6-example-woocommerce/main.js
+          filename: $GITHUB_WORKSPACE/testing_en_chile/load_testing_cicd_k6/k6-example-woocommerce/main.js
           flags: -v -q # verbose, quiet
           token: ${{ secrets.K6_CLOUD_TOKEN }}
         env:
